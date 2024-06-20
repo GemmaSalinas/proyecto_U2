@@ -1,0 +1,31 @@
+{
+    "as": "AS5769 Videotron Ltee",
+    "city": "Montreal",
+    "country": "Canada",
+    "countryCode": "CA",
+    "isp": "Le Groupe Videotron Ltee",
+    "lat": 45.6752,
+    "lon": -73.5022,
+    "org": "Videotron Ltee",
+    "query": "24.48.0.1",
+    "region": "QC",
+    "regionName": "Quebec",
+    "status": "success",
+    "timezone": "America/Toronto",
+    "zip": "H1A"
+}{
+    "as": "AS15169 Google LLC",
+    "city": "Ashburn",
+    "country": "United States",
+    "countryCode": "US",
+    "isp": "Google LLC",
+    "lat": 39.03,
+    "lon": -77.5,
+    "org": "Google Public DNS",
+    "query": "8.8.8.8",
+    "region": "VA",
+    "regionName": "Virginia",
+    "status": "success",
+    "timezone": "America/New_York",
+    "zip": "20149"
+}
