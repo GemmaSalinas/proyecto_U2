@@ -70,7 +70,7 @@ def get_api_ips():
         
     with open("./data/apis_devnet.json", 'w') as file:
         json.dump(response3.json(),file,indent=4,sort_keys=True)
-        json.dump(response4.json(),file,indent=4,sort_keys=True)
+        #json.dump(response4.json(),file,indent=4,sort_keys=True)
 
 
 if __name__ == '__main__':
