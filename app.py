@@ -26,7 +26,111 @@ def dhcpool():
         consulta=resp.json()
         print(resp.json())
         
-    
+    if request.method == 'POST' and request.form.get('action') == 'agregarpool':   
+        module = "data/Cisco-IOS-XE-native:native/ip/dhcp/"
+        id=request.form.get('nameid-input')
+        network=request.form.get('Network-input')
+        mask=request.form.get('Mask-input')
+        default=request.form.get('Default-input')
+        dns=request.form.get('DNS-input')
+        domain=request.form.get('Domain-input')
+        
+        
+        """pool_config ={'Cisco-IOS-XE-native:dhcp': {'Cisco-IOS-XE-dhcp:pool': [
+            {'id': id, 'default-router': {'default-router-list': [dafault]}, 
+             'dns-server': {'dns-server-list': [dns]}, 
+             'domain-name': domain, 
+             'network': {'primary-network': {'number': network, 'mask': mask}}}]}}
+        """
+        pool_config = {
+        "Cisco-IOS-XE-dhcp:pool": [
+            {
+                "id": id,
+                "default-router": {
+                    "default-router-list": [
+                        default
+                    ]
+                },
+                "dns-server": {
+                    "dns-server-list": [
+                        dns
+                    ]
+                },
+                "domain-name": domain,
+                "network": {
+                    "primary-network": {
+                        "number": network,
+                        "mask": mask
+                    }
+                }
+            }
+        ]
+    }
+        
+        """{
+        "Cisco-IOS-XE-dhcp:pool": [
+            {
+                "id": id,
+                "network": {
+                    "primary": {
+                        "address": network,
+                        "mask": mask
+                    }
+                },
+                "default-router": {
+                    "default-router-list": [default]
+                },
+                "dns-server": {
+                    "dns-server-list": [dns]
+                },
+                "domain-name": domain
+            }
+        ]
+    }"""
+        
+        print(pool_config)
+        print("Networksfgvbajvh aeocg repa")
+        print(json.dumps(pool_config, indent=2))
+        print("Enviando configuración del pool...")
+        
+        response = requests.post(f'{api_url}{module}', headers=headers, auth=basicauth, 
+                             data=json.dumps(pool_config), verify=False)
+
+   
+        if response.status_code == 201:
+            print("Nuevo pool DHCP agregado exitosamente")
+        else:
+            print(f"Error al agregar el nuevo pool DHCP: {response.status_code}")
+            print(response.text)
+            
+    if request.method == 'POST' and request.form.get('action') == 'eliminarpool':   
+        pool_id = request.form.get('idpoool-input')
+        print(pool_id)
+        module = "data/Cisco-IOS-XE-native:native/ip/dhcp/"
+        resp = requests.get(f'{api_url}{module}', auth=basicauth, headers=headers, verify=False)
+        
+        config = resp.json()
+        print(config)
+
+        if 'Cisco-IOS-XE-dhcp:pool' in config['Cisco-IOS-XE-native:dhcp']:
+            pools = config['Cisco-IOS-XE-native:dhcp']['Cisco-IOS-XE-dhcp:pool']
+
+            # Filtra los pools para eliminar 'SubredD'
+            updated_pools = [pool for pool in pools if pool['id'] != pool_id]
+
+            # Actualiza la configuración con los pools restantes
+            config['Cisco-IOS-XE-native:dhcp']['Cisco-IOS-XE-dhcp:pool'] = updated_pools
+
+            # Realiza la solicitud PUT a la API para subir la configuración actualizada
+            update_resp = requests.put(f'{api_url}{module}', auth=basicauth, headers=headers, json=config, verify=False)
+
+            if update_resp.status_code == 204:
+                print("Configuración actualizada exitosamente.")
+            else:
+                print(f"Error al actualizar la configuración: {update_resp.status_code} - {update_resp.text}")
+            
+            
+        
     return render_template('dhcpool.html',consulta=consulta)
     
 @app.route('/linevty',methods=['GET', 'POST'])
