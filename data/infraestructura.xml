@@ -1,0 +1,34 @@
+<network>
+    <router>
+        <device>
+            <model>7206VXR</model>
+            <so>Cisco IOS</so>
+            <type>hardware</type>
+            <vendor>Cisco</vendor>
+        </device>
+    </router>
+    <server1>
+        <server>
+            <linux_distribution>Mint</linux_distribution>
+            <name>server_Sergio</name>
+            <remote_connection>SSH</remote_connection>
+            <service>WEB</service>
+        </server>
+    </server1>
+    <server2>
+        <server>
+            <linux_distribution>Centos 8</linux_distribution>
+            <name>server_Gemma</name>
+            <service1>DNS</service1>
+            <service2>WEB</service2>
+        </server>
+    </server2>
+    <server3>
+        <server>
+            <linux_distribution>Centos 8</linux_distribution>
+            <name>server_Ana</name>
+            <service1>FTP</service1>
+            <service2>DHCP</service2>
+        </server>
+    </server3>
+</network>

@@ -1,0 +1,18 @@
+<router>
+    <hostname>R1 </hostname>
+    <interfaces>
+        <interface>
+        <name>GigabitEthernet1</name>   
+        <ip>192.168.1.1</ip>
+        <subnet>255.255.255.0</subnet>
+        </interface>
+    </interfaces>
+    <users>
+        <username>cisco</username>
+        <password>Cisco123</password>
+    </users>
+
+
+
+
+</router>
